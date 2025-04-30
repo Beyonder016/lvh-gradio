@@ -35,7 +35,7 @@ cd lvh-gradio
 pip install -r requirements.txt
 python app.py
 ```
-🛠 Built With
+## 🛠 Built With
 -PyTorch & torchvision
 -Grad-CAM (model explainability)
 -Gradio (interactive web UI)
