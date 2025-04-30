@@ -15,10 +15,12 @@ def get_model():
     model.fc = torch.nn.Linear(model.fc.in_features, 2)
     return model
 
-# Load weights from Hugging Face Hub
+# Load model from Hugging Face Hub
 model_path = hf_hub_download(repo_id="Beyonder016/lvh-detector", filename="model.pt")
 model = get_model()
-state_dict = torch.load(model_path, map_location="cpu")
+
+checkpoint = torch.load(model_path, map_location="cpu")
+state_dict = checkpoint["model"]  # this is the real fix
 model.load_state_dict(state_dict)
 model.eval()
 
