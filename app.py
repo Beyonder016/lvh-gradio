@@ -18,11 +18,10 @@ def get_model():
 # Load model from Hugging Face Hub
 model_path = hf_hub_download(repo_id="Beyonder016/lvh-detector", filename="model.pt")
 model = get_model()
-
-checkpoint = torch.load(model_path, map_location="cpu")
-state_dict = checkpoint["model"]  # this is the real fix
+state_dict = torch.load(model_path, map_location="cpu")  # no ["model"]!
 model.load_state_dict(state_dict)
 model.eval()
+
 
 # Grad-CAM helpers
 def get_last_conv_layer(model):
