@@ -1,0 +1,7 @@
+torch
+torchvision
+gradio
+huggingface_hub
+numpy
+Pillow
+matplotlib
