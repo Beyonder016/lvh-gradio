@@ -36,10 +36,14 @@ pip install -r requirements.txt
 python app.py
 ```
 ## 🛠 Built With
--PyTorch & torchvision
--Grad-CAM (model explainability)
--Gradio (interactive web UI)
--Hugging Face Spaces (deployment)
 
-🙌 Author
-Made with ❤️ by @Beyonder016
+- PyTorch & torchvision  
+- Grad-CAM (model explainability)  
+- Gradio (interactive web UI)  
+- Hugging Face Spaces (deployment)
+
+---
+
+## 🙌 Author
+
+Made with ❤️ by [@Beyonder016](https://github.com/Beyonder016)
