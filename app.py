@@ -6,13 +6,23 @@ import numpy as np
 from PIL import Image
 from huggingface_hub import hf_hub_download
 import matplotlib.pyplot as plt
+import torchvision.models as models
 
-# Load model from Hugging Face Hub
+# Define model architecture (same as used during training)
+def get_model():
+    model = models.resnet18(pretrained=False)
+    model.conv1 = torch.nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3, bias=False)
+    model.fc = torch.nn.Linear(model.fc.in_features, 2)
+    return model
+
+# Load weights from Hugging Face Hub
 model_path = hf_hub_download(repo_id="Beyonder016/lvh-detector", filename="model.pt")
-model = torch.load(model_path, map_location="cpu")
+model = get_model()
+state_dict = torch.load(model_path, map_location="cpu")
+model.load_state_dict(state_dict)
 model.eval()
 
-# Grad-CAM utility
+# Grad-CAM helpers
 def get_last_conv_layer(model):
     for name, module in reversed(model._modules.items()):
         if isinstance(module, torch.nn.Conv2d):
