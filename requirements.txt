@@ -1,7 +1,7 @@
+gradio>=3.50
 torch
 torchvision
-gradio
 huggingface_hub
-numpy
 Pillow
 matplotlib
+numpy
