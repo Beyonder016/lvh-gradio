@@ -8,6 +8,25 @@ This web app detects **Left Ventricular Hypertrophy (LVH)** using a deep learnin
 
 ---
 
+## 📦 Pretrained Models
+
+Looking to test the model with real predictions?
+
+👉 Head over to the **[Releases Page](https://github.com/Beyonder016/lvh-gradio/releases)** to download the latest pretrained model weights.
+
+**Available models:**
+- `resnet18_best.pth`
+- `resnet18_balanced.pth`
+- `resnet18_91acc.pth`
+
+Each model comes with a description to help you choose the best fit for your use case.
+
+> 📌 Note: Place the `.pth` file in the `model/` folder after downloading.
+
+---
+
+---
+
 ## 🧪 Try with Sample Images
 
 To quickly test the model, use these folders:
