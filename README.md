@@ -25,8 +25,6 @@ Each model comes with a description to help you choose the best fit for your use
 
 ---
 
----
-
 ## 🧪 Try with Sample Images
 
 To quickly test the model, use these folders:
