@@ -1,7 +1,6 @@
-gradio>=3.50
+streamlit
 torch
 torchvision
-huggingface_hub
 Pillow
 matplotlib
 numpy

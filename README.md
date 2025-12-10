@@ -1,7 +1,3 @@
-[🟢 Click here to try the Live Demo](https://huggingface.co/spaces/Beyonder016/lvh-gradio)
-
----
-
 # 🫀 LVH Detection from Chest X-Rays
 
 This web app detects **Left Ventricular Hypertrophy (LVH)** using a deep learning model trained on chest X-ray images. It uses Grad-CAM to visualize the areas influencing the prediction.
@@ -21,11 +17,7 @@ Looking to test the model with real predictions?
 
 Each model comes with a description to help you choose the best fit for your use case.
 
-> 📌 Note: Place the `.pth` file in the `model/` folder after downloading.
-
-Including the weights with your deployment avoids any dependency on internet access. The
-app now looks for a local file in `model/` first and only tries downloading from the Hub
-when nothing is found.
+> 📌 Note: Place the `.pth` file in the `model/` folder after downloading or upload it via the Streamlit sidebar when running the app. Internet access is not required.
 
 ---
 
@@ -36,7 +28,7 @@ To quickly test the model, use these folders:
 - 📂 [samples/LVH](samples/LVH) — X-rays with confirmed LVH  
 - 📂 [samples/No_LVH](samples/No_LVH) — X-rays without LVH
 
-👉 Download any image and upload it in the [Live Demo](https://huggingface.co/spaces/Beyonder016/lvh-gradio) interface to see predictions and Grad-CAM heatmaps.
+👉 Download any image and upload it in the app interface to see predictions and Grad-CAM heatmaps.
 
 ---
 
@@ -54,14 +46,13 @@ To quickly test the model, use these folders:
 git clone https://github.com/Beyonder016/lvh-gradio.git
 cd lvh-gradio
 pip install -r requirements.txt
-python app.py
+streamlit run app.py
 ```
 ## 🛠 Built With
 
-- PyTorch & torchvision  
-- Grad-CAM (model explainability)  
-- Gradio (interactive web UI)  
-- Hugging Face Spaces (deployment)
+- PyTorch & torchvision
+- Grad-CAM (model explainability)
+- Streamlit (interactive web UI)
 
 ---
 
