@@ -4,6 +4,14 @@ This Streamlit app detects **Left Ventricular Hypertrophy (LVH)** on chest X-ray
 
 ---
 
+## 🌐 Live Demo
+
+<a href="https://your-streamlit-app-url-here" target="_blank">
+  <img src="https://img.shields.io/badge/LVH%20Detector-Open%20App-1F75FE?style=for-the-badge&logo=google-chrome&logoColor=white" alt="LVH Demo">
+</a>
+
+
+---
 ## 🚀 Quickstart (Streamlit)
 
 ```bash
