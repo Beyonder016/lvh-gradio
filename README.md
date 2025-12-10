@@ -23,6 +23,10 @@ Each model comes with a description to help you choose the best fit for your use
 
 > 📌 Note: Place the `.pth` file in the `model/` folder after downloading.
 
+Including the weights with your deployment avoids any dependency on internet access. The
+app now looks for a local file in `model/` first and only tries downloading from the Hub
+when nothing is found.
+
 ---
 
 ## 🧪 Try with Sample Images

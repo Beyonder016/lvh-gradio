@@ -4,6 +4,9 @@ import torchvision.transforms as T
 import torch.nn.functional as F
 import numpy as np
 from PIL import Image
+from pathlib import Path
+from typing import Optional
+
 from huggingface_hub import hf_hub_download
 import matplotlib.pyplot as plt
 import torchvision.models as models
@@ -14,18 +17,51 @@ def get_model():
     model.fc = torch.nn.Linear(model.fc.in_features, 1)
     return model
 
-model_path = hf_hub_download(repo_id="Beyonder016/lvh-detector", filename="model.pt")
+MODEL_CANDIDATES = [
+    Path("model/model.pt"),
+    Path("model/resnet18_best.pth"),
+    Path("model/resnet18_balanced.pth"),
+    Path("model/resnet18_91acc.pth"),
+]
+
+
+def _find_local_model() -> Optional[Path]:
+    for candidate in MODEL_CANDIDATES:
+        if candidate.exists():
+            return candidate
+
+    generic_candidates = sorted(Path("model").glob("*.pt")) + sorted(
+        Path("model").glob("*.pth")
+    )
+    return generic_candidates[0] if generic_candidates else None
+
+
+def _load_checkpoint() -> torch.Tensor:
+    local_path = _find_local_model()
+    if local_path:
+        return torch.load(local_path, map_location="cpu")
+
+    try:
+        remote_path = hf_hub_download(
+            repo_id="Beyonder016/lvh-detector", filename="model.pt"
+        )
+    except Exception as download_error:
+        raise RuntimeError(
+            "No local model file found and downloading from Hugging Face Hub failed. "
+            "Place a model checkpoint inside the `model/` directory (e.g. `model.pt` "
+            "or `resnet18_best.pth`) to run the app without internet access."
+        ) from download_error
+
+    return torch.load(remote_path, map_location="cpu")
+
+
 model = get_model()
 
-checkpoint = torch.load(model_path, map_location="cpu")
+checkpoint = _load_checkpoint()
 if "model" in checkpoint:
     raw_state_dict = checkpoint["model"]
 else:
     raw_state_dict = checkpoint
-
-state_dict = {k.replace("model.", ""): v for k, v in raw_state_dict.items()}
-model.load_state_dict(state_dict)
-model.eval()
 
 def get_last_conv_layer(model):
     for name, module in reversed(model._modules.items()):
@@ -88,10 +124,10 @@ interface = gr.Interface(
     inputs=gr.Image(type="pil", label="Upload Chest X-ray"),
     outputs=[
         gr.Image(label="Grad-CAM Heatmap"),
-        gr.Textbox(label="Prediction")
+        gr.Textbox(label="Prediction"),
     ],
     title="LVH Detection Demo",
-    description="Upload a chest X-ray to predict Left Ventricular Hypertrophy"
+    description="Upload a chest X-ray to predict Left Ventricular Hypertrophy",
 )
 
 if __name__ == "__main__":
